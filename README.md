@@ -4,12 +4,15 @@ This repository provides a minimal Node.js + React setup for placing automated p
 
 ## Features
 
-* **Express.js** server with a `/start-call` endpoint.
-* **Socket.io** for pushing call status and transcripts to the browser.
-* **Twilio** integration for outbound calls (media handling stubbed).
-* Lightweight React front end that connects via WebSocket.
+1. Install dependencies for both server and client
+npm run install-all
+2. Create a `.env` file in the repository root with your configuration:
+3. Start the dev servers
 
-## Getting Started
+This launches the API server on `http://localhost:3001` and a static web
+server on `http://localhost:3000`.
+
+Then open `http://localhost:3000` in your browser.
 
 1. Install dependencies
 

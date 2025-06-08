@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
+const socket = io('http://localhost:3001');
+      const res = await fetch('http://localhost:3001/start-call', {
 import io from 'socket.io-client';
 import './index.css';
 

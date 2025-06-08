@@ -2,7 +2,8 @@ const path = require('path');
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
-require('dotenv').config();
+const cors = require('cors');
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 const telephony = require('./telephony');
 
@@ -15,7 +16,7 @@ const io = new Server(server, {
 });
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(cors());
 
 io.on('connection', socket => {
   console.log('WebSocket client connected');
