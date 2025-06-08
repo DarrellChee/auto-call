@@ -32,3 +32,9 @@ npm start
 ```
 
 Then open `http://localhost:3001` in your browser.
+
+
+Use the form on the page to enter a phone number, a short topic, and your name.
+Click **Start Call** and the server will place the call immediately. Call status
+and live transcript lines will appear below the form.
+
