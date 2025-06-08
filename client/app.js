@@ -60,6 +60,11 @@ function App() {
         lines.map((l, idx) =>
           React.createElement('li', { key: idx }, `${l.speaker}: ${l.text}`)
         )
+  return (
+    React.createElement('div', null,
+      React.createElement('h2', null, 'Call Status: ', status),
+      React.createElement('ul', null,
+        lines.map((l, idx) => React.createElement('li', { key: idx }, `${l.speaker}: ${l.text}`))
       )
     )
   );
