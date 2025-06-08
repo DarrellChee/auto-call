@@ -1,14 +1,13 @@
 {
-  "name": "auto-call",
-  "version": "1.0.0",
-  "main": "server.js",
+  "name": "auto-call-monorepo",
+  "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
+    "start-server": "npm start --prefix server",
+    "start-client": "npm start --prefix client",
+    "install-all": "npm install --prefix server && npm install --prefix client"
   },
-  "dependencies": {
-    "dotenv": "^16.3.1",
-    "express": "^4.19.2",
-    "socket.io": "^4.7.2",
-    "twilio": "^4.18.0"
+  "devDependencies": {
+    "concurrently": "^8.0.1"
   }
 }
