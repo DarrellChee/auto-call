@@ -3,6 +3,9 @@ const socket = io();
 function App() {
   const [status, setStatus] = React.useState('');
   const [lines, setLines] = React.useState([]);
+  const [phoneNumber, setPhoneNumber] = React.useState('');
+  const [topic, setTopic] = React.useState('');
+  const [userName, setUserName] = React.useState('');
 
   React.useEffect(() => {
     socket.on('call-status', payload => {
@@ -13,11 +16,50 @@ function App() {
     });
   }, []);
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      const res = await fetch('/start-call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phoneNumber, topic, userName })
+      });
+      const data = await res.json();
+      if (!res.ok || data.status !== 'started') {
+        alert('Failed to start call');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error starting call');
+    }
+  };
+
   return (
     React.createElement('div', null,
+      React.createElement('h1', null, 'Auto Call'),
+      React.createElement('form', { onSubmit: handleSubmit },
+        React.createElement('input', {
+          placeholder: 'Phone Number',
+          value: phoneNumber,
+          onChange: e => setPhoneNumber(e.target.value)
+        }),
+        React.createElement('input', {
+          placeholder: 'Topic',
+          value: topic,
+          onChange: e => setTopic(e.target.value)
+        }),
+        React.createElement('input', {
+          placeholder: 'Your Name',
+          value: userName,
+          onChange: e => setUserName(e.target.value)
+        }),
+        React.createElement('button', { type: 'submit' }, 'Start Call')
+      ),
       React.createElement('h2', null, 'Call Status: ', status),
       React.createElement('ul', null,
-        lines.map((l, idx) => React.createElement('li', { key: idx }, `${l.speaker}: ${l.text}`))
+        lines.map((l, idx) =>
+          React.createElement('li', { key: idx }, `${l.speaker}: ${l.text}`)
+        )
       )
     )
   );
